@@ -123,8 +123,11 @@ object juego {
         if(a.frente() != b.frente()) {
 			a.ocultar()
 			b.ocultar()
+			incorrecto.play()
         }
-
+		else {
+			correcto.play()
+		}
         self.comprobarPartidaGanada()
     }
 
@@ -135,6 +138,7 @@ object juego {
                 game.removeVisual(cursor)
 				game.removeVisual(fondoVacio)
                 game.addVisual(ganaste)
+				winTheme.play()
             }
         })
     }
