@@ -4,10 +4,17 @@ object fondoVacio {
 	method image() = "vaciob.jpg"
 }
 
+object tutorial {
+    method position() = game.origin()
+
+    method image() = "reglas.jpg"
+  
+}
+
 object ganaste {
     method position() = game.origin()
 
-    method image() = "win5.jpg"
+    method image() = "win3.jpg"
 }
 
 object config {

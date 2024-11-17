@@ -21,6 +21,9 @@ object juego {
 			self.iniciar()
 			self.crearCursor()
 		})
+		keyboard.t().onPressDo({
+			game.addVisual(tutorial)
+		})
 	}
 
 	method crearCursor() {
@@ -140,6 +143,6 @@ object juego {
                 game.addVisual(ganaste)
 				winTheme.play()
             }
-        })
-    }
+        })		
+}
 }
