@@ -13,10 +13,11 @@ object ganaste {
 object config {
     var tablero = 1 //1 o 2
     var seleccion = 3 //3 o 4
-
     var image = "config13c.png"
-    method image() = image
 
+    method tablero() = tablero
+    method seleccion() = seleccion
+    method image() = image
     method position() = game.at((1920 - 914) / 2, 300)
 
     method initialize() {

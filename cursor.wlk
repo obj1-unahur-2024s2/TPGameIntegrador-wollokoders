@@ -1,22 +1,23 @@
 import juego.*
+import otros.*
 import game.*
 
-object cursor {
-	//defino valores de los extremos para usar como validadadores
-	//para no pasarme cuando me muevo. No son constantes porque van
-	//a cambiar cuando agreguemos la dificultad 2
-	var yFilaArriba = 780
-	var yFilaAbajo = 380
-	var xColIzquierda = 50
-	var xColDerecha = 1610
+class Cursor {
+	const yFilaArriba
+	const yFilaAbajo
+	const xColIzquierda = 50
+	const xColDerecha
+	const variacionEnX
+	const variacionEnY
+	const cantFilas
 
-    var ultimoParDeTarjetas = []
+	const ultimoParDeTarjetas = []
 
-	var position = game.at(50,780)
+	var position = game.at(xColIzquierda,yFilaArriba)
 	var ubicacion = 1
 
 	method position() = position
-	method image() = "cursor.png"
+	method image() = "cursor" + config.tablero() + ".png"
 
 	method modificarPosicion(x, y, u)  {
 		position = game.at(position.x() + x, position.y() + y)
@@ -25,19 +26,19 @@ object cursor {
 
 	method initialize() {
 		keyboard.left().onPressDo({ 
-			if (position.x() != xColIzquierda) self.modificarPosicion(-312, 0, -2)
+			if (position.x() != xColIzquierda) self.modificarPosicion(-variacionEnX, 0, -cantFilas)
 		})
 
 		keyboard.right().onPressDo({
-			if (position.x() != xColDerecha) self.modificarPosicion(312, 0, 2)
+			if (position.x() != xColDerecha) self.modificarPosicion(variacionEnX, 0, cantFilas)
 		})
 
 		keyboard.down().onPressDo({
-			if (position.y() != yFilaAbajo) self.modificarPosicion(0, -400, 1)
+			if (position.y() != yFilaAbajo) self.modificarPosicion(0, -variacionEnY, 1)
 		})
 
 		keyboard.up().onPressDo({
-			if (position.y() != yFilaArriba) self.modificarPosicion(0, 400, -1)
+			if (position.y() != yFilaArriba) self.modificarPosicion(0, variacionEnY, -1)
 		})
 
 		keyboard.space().onPressDo({

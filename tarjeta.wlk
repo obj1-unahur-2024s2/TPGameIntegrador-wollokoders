@@ -1,15 +1,18 @@
 import cursor.*
+import otros.*
+
 class Tarjeta {
 	const position
-	var image = "dorso.jpg"
+	var image = self.dorso()
 	var frente = ""
-	// const property id = null
 
 	method image() = image
     method frente() = frente
 	method position() = position
 
-    method estaDescubierta() = image != "dorso.jpg"
+	method dorso() = "dorso" + config.tablero() + ".jpg"
+
+    method estaDescubierta() = image != self.dorso()
 
 	method frente(imagenFrente) {
 		frente = imagenFrente
@@ -20,6 +23,6 @@ class Tarjeta {
 	}
 
 	method ocultar() {
-		game.schedule(1000	, {image = "dorso.jpg"})
+		game.schedule(1000	, {image = self.dorso()})
 	}
 }

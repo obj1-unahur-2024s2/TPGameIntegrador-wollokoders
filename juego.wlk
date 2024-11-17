@@ -4,7 +4,7 @@ import tarjeta.*
 
 object juego {
 	var tarjetasActuales = []
-	var dificultad = 1 //falta implementar dificultad 2
+	var cursor = null
 
 	method tarjetasActuales() = tarjetasActuales
 
@@ -18,82 +18,109 @@ object juego {
 
 		keyboard.e().onPressDo({
 			game.addVisual(fondoVacio)
-			self.iniciarEnDificultad(dificultad)
-			game.addVisual(cursor)
+			self.iniciar()
+			self.crearCursor()
 		})
 	}
 
-	method iniciarEnDificultad(numero) {
-		if(dificultad == numero) {
-			tarjetasActuales = self.generarTarjetas()
-			tarjetasActuales.forEach({t => game.addVisual(t) })
-		}
+	method crearCursor() {
+		/*
+						|  x12  |  x18
+		yFilaArriba		|  780	|  870
+		yFilaAbajo		|  380	|  250
+		xColIzquierda	|  50	|  50
+		xColDerecha		|  1610	|  1660
+		variacionEnX	|  312	|  322
+		variacionEnY	|  400	|  310
+		cantFilas		|  2	|  3
+		*/
 
-        //testear pantalla ganaste. borrar para la versión final
+		if(config.tablero() == 1)
+			cursor = new Cursor(yFilaArriba=780, yFilaAbajo=380, xColDerecha=1610, variacionEnX=312, variacionEnY=400, cantFilas=2)
+		else 
+			cursor = new Cursor(yFilaArriba=870, yFilaAbajo=250, xColDerecha=1660, variacionEnX=322, variacionEnY=310, cantFilas=3)
+		
+		game.addVisual(cursor)
+	}
+
+	method iniciar() {
+		tarjetasActuales = if (config.tablero() == 1) self.generar12Tarjetas() else self.generar18Tarjetas()
+
+		tarjetasActuales.forEach({t => game.addVisual(t) })
+
+        //sirve para testear pantalla ganaste. borrar para la versión final
         keyboard.enter().onPressDo({
 			tarjetasActuales.forEach({t => t.descubrir() })
             self.comprobarPartidaGanada()
         })  
 	}
 
-    //ver si se puede reducir complejidad. probablemente sea
-    //refactorizada para la dificultad 2
-	method generarTarjetas() {
+	method generar12Tarjetas() {
 		const tarjetas = []
+		const x = -262 //50 - 312
 
-		//crea 12 tarjetas y las guarda en la lista que se retornará
-		const x = -262
 		6.times({i =>
 				tarjetas.add(new Tarjeta(position = game.at(x+312*i, 780)))
 				tarjetas.add(new Tarjeta(position = game.at(x+312*i, 380)))
 		})
 
-		//desde una lista de 1 a 20, selecciona al azar 6 números para
-		//usarlos como nombre del archivo del frente de la tarjeta
-		const posiblesIndices = []
-		const indicesFinales = []
+		const sufijos = self.elegirSufijosRandom(6)
+		return self.asociarTarjetasAFrente(tarjetas, sufijos)
+	}
 
-		20.times({ i => 
-				posiblesIndices.add(i)
+	method generar18Tarjetas() {
+		const tarjetas = []
+		const x = -272 // 50 - 322
+
+		6.times({i =>
+				tarjetas.add(new Tarjeta(position = game.at(x+322*i, 870)))
+				tarjetas.add(new Tarjeta(position = game.at(x+322*i, 560)))
+				tarjetas.add(new Tarjeta(position = game.at(x+322*i, 250)))
 		})
 
-		6.times({ i =>
-				const valor = posiblesIndices.anyOne()
-				indicesFinales.add(valor)
-				posiblesIndices.remove(valor)
+		const sufijos = self.elegirSufijosRandom(9)
+		return self.asociarTarjetasAFrente(tarjetas, sufijos)
+	}
+
+	method elegirSufijosRandom(cantUnicos) {
+		//desde una lista de 1 a 20, selecciona al azar los números únicos
+		//para usarlos como sufijos del nombre del archivo del frente de la tarjeta
+		const posiblesSufijos = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+		const sufijosFinales = []
+
+		cantUnicos.times({ i =>
+			const valor = posiblesSufijos.anyOne()
+			sufijosFinales.add(valor)
+			posiblesSufijos.remove(valor)
 		})
 
-		//a la lista de 6 números random, le vuelvo a ingresar los
+		//a la lista de números random únicos, le vuelvo a ingresar los
 		//números que ya tiene pero en diferente orden. esto permitirá
-		//que haya pares de tarjetas
-		const listaCopia = indicesFinales.copy()
+		//que haya pares de tarjetas y que el orden sea impredecible
+		const listaCopia = sufijosFinales.copy()
 
-		6.times({ i => 
-				const valor = listaCopia.anyOne()
-				indicesFinales.add(valor)
-				listaCopia.remove(valor)
+		cantUnicos.times({ i => 
+			const valor = listaCopia.anyOne()
+			sufijosFinales.add(valor)
+			listaCopia.remove(valor)
 		})
 
-        //asocio cada tarjeta a un archivo para el frente
-		12.times({ i =>
-				tarjetas.get(i-1).frente("ARG" + indicesFinales.get(i-1) + ".png")
-		})
+		return sufijosFinales
+	}
+
+	method asociarTarjetasAFrente(tarjetas, indicesFinales) {
+		tarjetas.size().times({ i =>
+			tarjetas.get(i-1).frente(config.tablero().toString() + "ARG" + indicesFinales.get(i-1) + ".jpg")
+		})	
 
 		return tarjetas
 	}
 
     method comprobarPar(par) {
-        //tuve problemas si usaba foreach dentro de schedule, por eso
-        //use las constantes
-
         const a = par.first()
         const b = par.last()
 
         if(a.frente() != b.frente()) {
-            // game.schedule(1000, {
-            //     a.ocultar()
-            //     b.ocultar()
-            // })
 			a.ocultar()
 			b.ocultar()
         }
