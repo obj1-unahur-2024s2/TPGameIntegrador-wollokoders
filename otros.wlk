@@ -14,7 +14,7 @@ object tutorial {
 object ganaste {
     method position() = game.origin()
 
-    method image() = "win3.jpg"
+    method image() = "win4.jpg"
 }
 
 object config {
