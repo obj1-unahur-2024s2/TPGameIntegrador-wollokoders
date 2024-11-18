@@ -19,6 +19,7 @@ object juego {
 		game.addVisual(instrucciones)
 		sonidoDeFondo.shouldLoop(true)
 		sonidoDeFondo.play()
+		sonidoDeFondo.volume(0.5)
 		keyboard.s().onPressDo({sonidoDeFondo.pause()})
 		keyboard.r().onPressDo({sonidoDeFondo.resume()})
 		
