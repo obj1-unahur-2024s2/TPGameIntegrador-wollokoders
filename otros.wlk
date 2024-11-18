@@ -7,8 +7,7 @@ object fondoVacio {
 object tutorial {
     method position() = game.origin()
 
-    method image() = "reglas.jpg"
-  
+    method image() = "tutorialycontroles.jpg"
 }
 
 object ganaste {
@@ -17,10 +16,16 @@ object ganaste {
     method image() = "win4.jpg"
 }
 
+object tiempoTerminado {
+    method position() = game.origin()
+
+    method image() = "tiempoTerminado.jpg"
+}
+
 object config {
     var tablero = 1 //1 o 2
     var seleccion = 3 //3 o 4
-    var image = "config13c.png"
+    var image = "config13d.png"
 
     method tablero() = tablero
     method seleccion() = seleccion
@@ -47,7 +52,7 @@ object config {
     }
 
     method cambiarImagen() {
-        image = "config" + tablero.toString() + seleccion.toString() + "c.png"
+        image = "config" + tablero.toString() + seleccion.toString() + "d.png"
     }
 }
 

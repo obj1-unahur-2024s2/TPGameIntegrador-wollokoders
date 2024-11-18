@@ -1,3 +1,4 @@
+import pantalla.*
 import otros.*
 import cursor.*
 import tarjeta.*
@@ -6,6 +7,8 @@ object juego {
 	var tarjetasActuales = []
 	var cursor = null
 	const sonidoDeFondo = game.sound("copatheme.mp3")
+	var tiempo = null
+	var puntos = null
 	
 
 	method tarjetasActuales() = tarjetasActuales
@@ -22,12 +25,12 @@ object juego {
 		sonidoDeFondo.volume(0.5)
 		keyboard.s().onPressDo({sonidoDeFondo.pause()})
 		keyboard.r().onPressDo({sonidoDeFondo.resume()})
-		
 
 		keyboard.e().onPressDo({
 			instrucciones.detenerTitileo()
 			game.addVisual(fondoVacio)
 			self.iniciar()
+			
 			self.crearCursor()
 		})
 		keyboard.t().onPressDo({
@@ -62,6 +65,9 @@ object juego {
 		tarjetasActuales = if (config.tablero() == 1) self.generar12Tarjetas() else self.generar18Tarjetas()
 
 		tarjetasActuales.forEach({t => game.addVisual(t) })
+
+		tiempo = new PantallaDeNumeros(xDecena=1620, xUnidad=1650)
+		tiempo.temporizador(if (config.tablero() == 1) 50 else 99)
 
         //sirve para testear pantalla ganaste. borrar para la versión final
         keyboard.enter().onPressDo({
@@ -124,12 +130,16 @@ object juego {
 	}
 
 	method asociarTarjetasAFrente(tarjetas, indicesFinales) {
+		const pais = self.elegirUnPais()
+
 		tarjetas.size().times({ i =>
-			tarjetas.get(i-1).frente(config.tablero().toString() + "ARG" + indicesFinales.get(i-1) + ".jpg")
+			tarjetas.get(i-1).frente(config.tablero().toString() + pais + indicesFinales.get(i-1) + ".jpg")
 		})	
 
 		return tarjetas
 	}
+
+	method elegirUnPais() = if (config.seleccion() == 3) "ARG" else ["BRA", "PAR", "URU"].anyOne()
 
     method comprobarPar(par) {
         const a = par.first()
@@ -155,22 +165,28 @@ object juego {
                 game.addVisual(ganaste)
 				winTheme.play()
             }
-        })		
-}
+		})		
+	}
 
-method volverAlMenu() {
-    // Eliminar visuales de la partida (tarjetas, cursor, etc.)
-    game.removeVisual(fondoVacio)
-    game.removeVisual(cursor)
-	game.removeVisual(tutorial)
-	game.removeVisual(ganaste)
-	 
-    tarjetasActuales.forEach({ t =>
-        game.removeVisual(t) // Elimina cada tarjeta individualmente
-    })
-    
-   	game.addVisual(config)
-	instrucciones.iniciarTitileo()
-	
-}
+	method tiempoTerminado() {
+			tarjetasActuales.forEach({t => game.removeVisual(t)})
+			game.removeVisual(cursor)
+			game.removeVisual(fondoVacio)
+			game.addVisual(tiempoTerminado)
+	}
+
+	method volverAlMenu() {
+		// Eliminar visuales de la partida (tarjetas, cursor, etc.)
+		game.removeVisual(fondoVacio)
+		game.removeVisual(cursor)
+		game.removeVisual(tutorial)
+		game.removeVisual(ganaste)
+		
+		tarjetasActuales.forEach({ t =>
+			game.removeVisual(t) // Elimina cada tarjeta individualmente
+		})
+		
+		game.addVisual(config)
+		instrucciones.iniciarTitileo()
+	}
 }

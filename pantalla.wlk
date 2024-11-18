@@ -1,17 +1,17 @@
 import juego.*
 
 class Cifra {
-    var image = "0.png"
+    var image = "num9.png"
     const position
 
     method image() = image
     method position() = position
 
     method mostrar(numero) {
-        image = numero.toString() + ".png"
+        image = "num" + numero.toString() + ".png"
     }
 
-    method enCero() = image == "0.png"
+    method enCero() = image == "num0.png"
 }
 
 class PantallaDeNumeros {
@@ -20,8 +20,8 @@ class PantallaDeNumeros {
     const xDecena
     const xUnidad
 
-    const decena = new Cifra(position=game.at(xDecena, 50))
-    const unidad = new Cifra(position=game.at(xUnidad, 50))
+    const decena = new Cifra(position=game.at(xDecena, 80))
+    const unidad = new Cifra(position=game.at(xUnidad, 80))
 
     const cifras = [decena, unidad]
 
@@ -40,18 +40,16 @@ class PantallaDeNumeros {
 
     method temporizador(segundos) {
         var tiempo = segundos
+        var finalizado = false
 
-        game.onTick(1000, "temporizador", {
+        game.onTick(1100, "temporizador", {
             self.mostrar(tiempo)
             tiempo -= 1
 
-            if(cifras.all({c => c.enCero()}))
+            if(cifras.all({c => c.enCero()})) {
                 game.removeTickEvent("temporizador")
-                juego.terminarPartida()
-                /*
-                el último método aun no está creado. pero removería figuritas y cursor,
-                y agregaría una imagen de "partida terminada" que aun no hicimos :(
-                */
+                juego.tiempoTerminado()
+            }
         })
     }
 }
