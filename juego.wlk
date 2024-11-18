@@ -169,6 +169,7 @@ object juego {
 	}
 
 	method tiempoTerminado() {
+			derrota.play()
 			tarjetasActuales.forEach({t => game.removeVisual(t)})
 			game.removeVisual(cursor)
 			game.removeVisual(fondoVacio)

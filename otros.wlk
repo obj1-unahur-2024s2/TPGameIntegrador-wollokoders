@@ -118,6 +118,12 @@ object correcto {
     }
 }
 
+object derrota{
+    method play(){
+        game.sound("derrota.mp3").play()
+    }
+}
+
 object incorrecto {
     method play() {
         game.sound("incorrecto.mp3").play()
