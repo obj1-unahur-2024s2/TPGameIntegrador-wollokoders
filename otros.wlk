@@ -1,7 +1,7 @@
 object fondoVacio {
 	method position() = game.origin()
 
-	method image() = "vaciob.jpg"
+	method image() = "vacio1.jpg"
 }
 
 object tutorial {
@@ -107,4 +107,8 @@ object winTheme {
     }
 }
 
-//falta el sonido de fondo
+/*object sonidoDeFondo {
+    method play(){
+        game.sound("copatheme.mp3").shouldLoop(true).play()  
+    }     
+}*/

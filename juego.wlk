@@ -5,6 +5,8 @@ import tarjeta.*
 object juego {
 	var tarjetasActuales = []
 	var cursor = null
+	const sonidoDeFondo = game.sound("copatheme.mp3")
+	
 
 	method tarjetasActuales() = tarjetasActuales
 
@@ -12,9 +14,14 @@ object juego {
 		game.cellSize(1)
 		game.width(1920)
 		game.height(1200)
-		game.boardGround("maind.jpg")
+		game.boardGround("main.jpg")
 		game.addVisual(config)
 		game.addVisual(instrucciones)
+		sonidoDeFondo.shouldLoop(true)
+		sonidoDeFondo.play()
+		keyboard.s().onPressDo({sonidoDeFondo.pause()})
+		keyboard.r().onPressDo({sonidoDeFondo.resume()})
+		
 
 		keyboard.e().onPressDo({
 			game.addVisual(fondoVacio)
@@ -24,6 +31,9 @@ object juego {
 		keyboard.t().onPressDo({
 			game.addVisual(tutorial)
 		})
+		keyboard.m().onPressDo({
+        self.volverAlMenu()
+    })
 	}
 
 	method crearCursor() {
@@ -144,5 +154,20 @@ object juego {
 				winTheme.play()
             }
         })		
+}
+
+method volverAlMenu() {
+    // Eliminar visuales de la partida (tarjetas, cursor, etc.)
+    game.removeVisual(fondoVacio)
+    game.removeVisual(cursor)
+	game.removeVisual(tutorial)
+	 
+    tarjetasActuales.forEach({ t =>
+        game.removeVisual(t) // Elimina cada tarjeta individualmente
+    })
+    
+   	game.addVisual(config)
+	game.addVisual(instrucciones)
+	
 }
 }
