@@ -52,9 +52,27 @@ object config {
 }
 
 object instrucciones {
-    method image() = "instrucciones.png"
+    var visibilidad = true
 
+    method image() = "instrucciones.png"
+    
     method position() = game.at(0, 50)
+    
+    method iniciarTitileo() {
+        game.onTick(800, "titileo", {
+            visibilidad = not visibilidad
+            if (visibilidad) {
+                game.addVisual(self)  
+            } else {
+                game.removeVisual(self)  
+            }
+        })
+    }
+
+    method detenerTitileo() {
+        game.removeTickEvent("titileo")
+        game.removeVisual(self)  
+    }
 }
 
 //Efectos de sonido

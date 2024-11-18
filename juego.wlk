@@ -16,7 +16,7 @@ object juego {
 		game.height(1200)
 		game.boardGround("main.jpg")
 		game.addVisual(config)
-		game.addVisual(instrucciones)
+		instrucciones.iniciarTitileo()
 		sonidoDeFondo.shouldLoop(true)
 		sonidoDeFondo.play()
 		sonidoDeFondo.volume(0.5)
@@ -25,6 +25,7 @@ object juego {
 		
 
 		keyboard.e().onPressDo({
+			instrucciones.detenerTitileo()
 			game.addVisual(fondoVacio)
 			self.iniciar()
 			self.crearCursor()
@@ -162,13 +163,14 @@ method volverAlMenu() {
     game.removeVisual(fondoVacio)
     game.removeVisual(cursor)
 	game.removeVisual(tutorial)
+	game.removeVisual(ganaste)
 	 
     tarjetasActuales.forEach({ t =>
         game.removeVisual(t) // Elimina cada tarjeta individualmente
     })
     
    	game.addVisual(config)
-	game.addVisual(instrucciones)
+	instrucciones.iniciarTitileo()
 	
 }
 }
