@@ -34,20 +34,20 @@ El jugador tiene que dar vuelta dos figuritas, intentando reunir un par. Si acie
 
 
 ## Controles
-Configurar partida:
+- Configurar partida:
 1 = 12 figuritas
 2 = 18 figuritas
 3 = Seleccion Argentina
 4 = Seleccion al azar entre Uruguay, Brasil y Paraguay
-Empezar partida  Tecla: “e”
-Ver tutorial : Tecla “t”
-Volver al menu/inicio : Tecla “m”
-Mover cabezal entre figuritas: ↑ , ↓, ← →
-Voltear una figurita : Enter
-Sonido : Con la tecla “s” se silencia, y con la tecla “r” se reproduce.
+- Empezar partida  Tecla: “e”
+- Ver tutorial : Tecla “t”
+- Volver al menu/inicio : Tecla “m”
+- Mover cabezal entre figuritas: ↑ , ↓, ← →
+- Voltear una figurita : Enter
+- Sonido : Con la tecla “s” se silencia, y con la tecla “r” se reproduce.
 
 ## Otros
 
-Comisión 1A turno noche, Universidad Nacional De Hurlingham.
-"wollokVersion": "4.0.0"
+- Comisión 1A turno noche, Universidad Nacional De Hurlingham.
+- "wollokVersion": "4.0.0"
 
