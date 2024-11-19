@@ -35,9 +35,9 @@ El jugador tiene que dar vuelta dos figuritas, intentando reunir un par. Si acie
 
 ## Controles
 - Configurar partida:
-1 = 12 figuritas
-2 = 18 figuritas
-3 = Seleccion Argentina
+1 = 12 figuritas,
+2 = 18 figuritas,
+3 = Seleccion Argentina,
 4 = Seleccion al azar entre Uruguay, Brasil y Paraguay
 - Empezar partida  Tecla: “e”
 - Ver tutorial : Tecla “t”
