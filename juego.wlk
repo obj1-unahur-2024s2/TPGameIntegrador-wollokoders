@@ -26,6 +26,10 @@ object juego {
 		sonidoDeFondo.play()
 		sonidoDeFondo.volume(0.5)
 
+		self.configurarTeclas()		
+	}
+
+	method configurarTeclas() {
 		keyboard.s().onPressDo({sonidoDeFondo.pause()})
 		keyboard.r().onPressDo({sonidoDeFondo.resume()})
 
@@ -66,6 +70,8 @@ object juego {
 	}
 
 	method iniciar() {
+		puntos = 0
+
 		tarjetasActuales = if (config.tablero() == 1) self.generar12Tarjetas() else self.generar18Tarjetas()
 
 		tarjetasActuales.forEach({t => game.addVisual(t) })
@@ -79,7 +85,7 @@ object juego {
 		puntaje = new PantallaDeNumeros(xDecena=430, xUnidad=460, y=80)
 		puntaje.mostrar(0)
 
-        //sirve para testear pantalla ganaste. borrar para la versión final
+        //sirve para testear pantalla ganaste
         keyboard.enter().onPressDo({
 			tarjetasActuales.forEach({t => t.descubrir() })
             self.comprobarPartidaGanada()
@@ -149,7 +155,7 @@ object juego {
 		return tarjetas
 	}
 
-	method elegirUnPais() = if (config.seleccion() == 3) "ARG" else ["BRA", "PAR", "URU"].anyOne()
+	method elegirUnPais() = if (config.seleccion() == 3) "ARG" else ["BRA", "PAR", "URU", "BOL", "CAN"].anyOne()
 
     method comprobarPar(par) {
         const a = par.first()
@@ -189,10 +195,10 @@ object juego {
 	}
 
 	method volverAMostrarPuntos() {
-		textoPuntos.position(game.at(786,300))//184,98
+		textoPuntos.position(game.at(786,300))
 
 		game.addVisual(textoPuntos)
-		puntaje = new PantallaDeNumeros(xDecena=1030, xUnidad=1060, y=282) //430.460 (y=80)
+		puntaje = new PantallaDeNumeros(xDecena=1030, xUnidad=1060, y=282)
 		puntaje.mostrar(puntos)
 	}
 
@@ -204,9 +210,13 @@ object juego {
 	}
 
 	method volverAlMenu() {
-		self.retirarVisuales()
+		game.clear()
+		// self.retirarVisuales()
+		game.removeTickEvent("temporizador")
 		game.addVisual(config)
+		config.initialize()
 		instrucciones.iniciarTitileo()
+		self.configurarTeclas()
 	}
 
 	method retirarVisuales() {
