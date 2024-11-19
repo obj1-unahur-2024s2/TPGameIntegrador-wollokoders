@@ -1,6 +1,7 @@
 import juego.*
 import otros.*
 import game.*
+import sonidos.*
 
 class Cursor {
 	const yFilaArriba
@@ -46,7 +47,7 @@ class Cursor {
 		})
 
 		keyboard.space().onPressDo({
-			darVuelta.play()
+			// darVuelta.play()
             const tarjetaSeleccionada = juego.tarjetasActuales().get(ubicacion - 1)
 
             if(not tarjetaSeleccionada.estaDescubierta()) {

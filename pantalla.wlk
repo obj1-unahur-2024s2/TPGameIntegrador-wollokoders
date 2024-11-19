@@ -20,9 +20,10 @@ class PantallaDeNumeros {
     //por ejemplo podrían ser 1500 y 1700 para que se muestre en la derecha
     const xDecena
     const xUnidad
+    const y
 
-    const decena = new Cifra(position=game.at(xDecena, 80))
-    const unidad = new Cifra(position=game.at(xUnidad, 80))
+    const decena = new Cifra(position=game.at(xDecena, y))
+    const unidad = new Cifra(position=game.at(xUnidad, y))
 
     const cifras = [decena, unidad]
 
@@ -46,7 +47,7 @@ class PantallaDeNumeros {
             self.mostrar(tiempo)
             tiempo -= 1
 
-            if(cifras.all({c => c.enCero()}) and not game.hasVisual(ganaste)) {
+            if(cifras.all({c => c.enCero()})) {
                 game.removeTickEvent("temporizador")
                 juego.tiempoTerminado()
             }

@@ -2,6 +2,7 @@ import pantalla.*
 import otros.*
 import cursor.*
 import tarjeta.*
+import sonidos.*
 
 object juego {
 	var tarjetasActuales = []
@@ -10,7 +11,6 @@ object juego {
 	var tiempo = null
 	var puntaje = null
 	var puntos = 0
-	
 
 	method tarjetasActuales() = tarjetasActuales
 
@@ -37,9 +37,10 @@ object juego {
 			self.crearCursor()
 		})
 		keyboard.t().onPressDo({
+			self.retirarVisuales()
 			game.addVisual(tutorial)
 		})
-			keyboard.m().onPressDo({
+		keyboard.m().onPressDo({
 			self.volverAlMenu()
 		})
 	}
@@ -69,10 +70,14 @@ object juego {
 
 		tarjetasActuales.forEach({t => game.addVisual(t) })
 
-		tiempo = new PantallaDeNumeros(xDecena=1620, xUnidad=1650)
+		game.addVisual(textoTiempo)
+		tiempo = new PantallaDeNumeros(xDecena=1620, xUnidad=1650, y=80)
 		tiempo.temporizador(if (config.tablero() == 1) 50 else 99)
 
-		puntaje = new PantallaDeNumeros(xDecena=300, xUnidad=330)
+		textoPuntos.position(game.at(184,98))
+		game.addVisual(textoPuntos)
+		puntaje = new PantallaDeNumeros(xDecena=430, xUnidad=460, y=80)
+		puntaje.mostrar(0)
 
         //sirve para testear pantalla ganaste. borrar para la versión final
         keyboard.enter().onPressDo({
@@ -174,35 +179,38 @@ object juego {
     method comprobarPartidaGanada() {
         game.schedule(500, {
             if(tarjetasActuales.all({t => t.estaDescubierta()})) {
-                tarjetasActuales.forEach({t => game.removeVisual(t)})
-                game.removeVisual(cursor)
-				game.removeVisual(fondoVacio)
+				self.retirarVisuales()
+				game.removeTickEvent("temporizador")
                 game.addVisual(ganaste)
 				winTheme.play()
+				self.volverAMostrarPuntos()
             }
 		})		
 	}
 
+	method volverAMostrarPuntos() {
+		textoPuntos.position(game.at(786,300))//184,98
+
+		game.addVisual(textoPuntos)
+		puntaje = new PantallaDeNumeros(xDecena=1030, xUnidad=1060, y=282) //430.460 (y=80)
+		puntaje.mostrar(puntos)
+	}
+
 	method tiempoTerminado() {
 			derrota.play()
-			tarjetasActuales.forEach({t => game.removeVisual(t)})
-			game.removeVisual(cursor)
-			game.removeVisual(fondoVacio)
+			self.retirarVisuales()
 			game.addVisual(tiempoTerminado)
+			self.volverAMostrarPuntos()
 	}
 
 	method volverAlMenu() {
-		// Eliminar visuales de la partida (tarjetas, cursor, etc.)
-		game.removeVisual(fondoVacio)
-		game.removeVisual(cursor)
-		game.removeVisual(tutorial)
-		game.removeVisual(ganaste)
-		
-		tarjetasActuales.forEach({ t =>
-			game.removeVisual(t) // Elimina cada tarjeta individualmente
-		})
-		
+		self.retirarVisuales()
 		game.addVisual(config)
 		instrucciones.iniciarTitileo()
+	}
+
+	method retirarVisuales() {
+		game.allVisuals().forEach({ v => game.removeVisual(v)})
+		instrucciones.detenerTitileo()
 	}
 }
