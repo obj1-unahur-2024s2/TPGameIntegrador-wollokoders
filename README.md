@@ -2,11 +2,11 @@
 
 ## Equipo de desarrollo
 
-- Javier
-- Paula Godoy
-- Rocio
-- Santi
-- Camila Castello
+- Casco, Javier.
+- Godoy, Paula.
+- Carrizo, Rocio.
+- Gomez, Santiago.
+- Castello, Camila.
 
 ## Capturas
 
