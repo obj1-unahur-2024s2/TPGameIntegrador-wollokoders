@@ -8,7 +8,8 @@ object juego {
 	var cursor = null
 	const sonidoDeFondo = game.sound("copatheme.mp3")
 	var tiempo = null
-	var puntos = null
+	var puntaje = null
+	var puntos = 0
 	
 
 	method tarjetasActuales() = tarjetasActuales
@@ -19,10 +20,12 @@ object juego {
 		game.height(1200)
 		game.boardGround("mainb.jpg")
 		game.addVisual(config)
+
 		instrucciones.iniciarTitileo()
 		sonidoDeFondo.shouldLoop(true)
 		sonidoDeFondo.play()
 		sonidoDeFondo.volume(0.5)
+
 		keyboard.s().onPressDo({sonidoDeFondo.pause()})
 		keyboard.r().onPressDo({sonidoDeFondo.resume()})
 
@@ -36,9 +39,9 @@ object juego {
 		keyboard.t().onPressDo({
 			game.addVisual(tutorial)
 		})
-		keyboard.m().onPressDo({
-        self.volverAlMenu()
-    })
+			keyboard.m().onPressDo({
+			self.volverAlMenu()
+		})
 	}
 
 	method crearCursor() {
@@ -68,6 +71,8 @@ object juego {
 
 		tiempo = new PantallaDeNumeros(xDecena=1620, xUnidad=1650)
 		tiempo.temporizador(if (config.tablero() == 1) 50 else 99)
+
+		puntaje = new PantallaDeNumeros(xDecena=300, xUnidad=330)
 
         //sirve para testear pantalla ganaste. borrar para la versión final
         keyboard.enter().onPressDo({
@@ -129,11 +134,11 @@ object juego {
 		return sufijosFinales
 	}
 
-	method asociarTarjetasAFrente(tarjetas, indicesFinales) {
+	method asociarTarjetasAFrente(tarjetas, sufijosFinales) {
 		const pais = self.elegirUnPais()
 
 		tarjetas.size().times({ i =>
-			tarjetas.get(i-1).frente(config.tablero().toString() + pais + indicesFinales.get(i-1) + ".jpg")
+			tarjetas.get(i-1).frente(config.tablero().toString() + pais + sufijosFinales.get(i-1) + ".jpg")
 		})	
 
 		return tarjetas
@@ -152,9 +157,19 @@ object juego {
         }
 		else {
 			correcto.play()
+			self.calcularPuntaje()
+			puntaje.mostrar(puntos)
 		}
         self.comprobarPartidaGanada()
     }
+
+	method calcularPuntaje() {
+		puntos = puntos + self.puntosPorTablero() + self.puntosPorSeleccion()
+	}
+
+	method puntosPorTablero() = if (config.tablero() == 1) 1 else 2
+
+	method puntosPorSeleccion() = if (config.seleccion() == 3) 1 else 3
 
     method comprobarPartidaGanada() {
         game.schedule(500, {

@@ -19,7 +19,7 @@ object ganaste {
 object tiempoTerminado {
     method position() = game.origin()
 
-    method image() = "tiempoTerminado.jpg"
+    method image() = "tiempoTerminadob.jpg"
 }
 
 object config {

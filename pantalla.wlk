@@ -1,7 +1,8 @@
+import otros.*
 import juego.*
 
 class Cifra {
-    var image = "num9.png"
+    var image = "numx.png"
     const position
 
     method image() = image
@@ -40,13 +41,12 @@ class PantallaDeNumeros {
 
     method temporizador(segundos) {
         var tiempo = segundos
-        var finalizado = false
 
         game.onTick(1100, "temporizador", {
             self.mostrar(tiempo)
             tiempo -= 1
 
-            if(cifras.all({c => c.enCero()})) {
+            if(cifras.all({c => c.enCero()}) and not game.hasVisual(ganaste)) {
                 game.removeTickEvent("temporizador")
                 juego.tiempoTerminado()
             }
