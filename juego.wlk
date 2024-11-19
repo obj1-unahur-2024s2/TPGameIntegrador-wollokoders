@@ -17,7 +17,7 @@ object juego {
 		game.cellSize(1)
 		game.width(1920)
 		game.height(1200)
-		game.boardGround("main.jpg")
+		game.boardGround("mainb.jpg")
 		game.addVisual(config)
 		instrucciones.iniciarTitileo()
 		sonidoDeFondo.shouldLoop(true)
