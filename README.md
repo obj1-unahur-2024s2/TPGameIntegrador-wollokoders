@@ -30,7 +30,7 @@ Pantalla “ganaste del juego”
 
 ## Reglas de Juego / Instrucciones
 
-El jugador tiene que dar vuelta dos figuritas, intentando reunir un par. Si acierta, suma puntos y se conserva en el tablero el par encontrado. Si no, las figuritas se vuelven a voltear, el jugador deberá observar atentamente las fichas a medida que las voltea reteniendo en la memoria el lugar que ocupaban para poder levantarlas cuando las necesite.
+El jugador tiene que dar vuelta dos figuritas, intentando reunir un par. Si acierta, suma puntos y se conserva en el tablero el par encontrado. Si no, las figuritas se vuelven a voltear. El jugador deberá observar atentamente las fichas a medida que las voltea reteniendo en la memoria el lugar que ocupaban para poder levantarlas cuando las necesite.
 
 
 ## Controles
