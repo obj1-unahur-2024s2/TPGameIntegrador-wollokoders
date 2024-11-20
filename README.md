@@ -43,7 +43,7 @@ El jugador tiene que dar vuelta dos figuritas, intentando reunir un par. Si acie
 - Ver tutorial : Tecla “T”.
 - Volver al menu/inicio : Tecla “M”
 - Mover cabezal entre figuritas: ↑ , ↓, ← →.
-- Voltear una figurita : Tecla Enter
+- Voltear una figurita : Tecla de espacio.
 - Sonido : Con la tecla “S” se silencia, y con la tecla “R” se reproduce.
 
 ## Otros
