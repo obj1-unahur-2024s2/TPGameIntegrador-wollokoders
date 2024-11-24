@@ -110,7 +110,7 @@ object juego {
 			sonidos.correcto().play()
 			self.calcularPuntaje()
 			interfaz.actualizarPuntaje()
-	        self.comprobarPartidaGanada() //puede ir arriba?
+	        self.comprobarPartidaGanada()
 		}
     }
 

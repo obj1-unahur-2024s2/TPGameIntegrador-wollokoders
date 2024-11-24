@@ -99,7 +99,6 @@ object interfaz {
         self.mostrarMenu()
 	}
 
-    //pantallas ganar y tiempo terminado
     method retirarVisuales() {
 		game.allVisuals().forEach({ v => game.removeVisual(v)})
 		instrucciones.detenerTitileo()
