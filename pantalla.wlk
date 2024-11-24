@@ -1,3 +1,4 @@
+import interfaz.*
 import otros.*
 import juego.*
 
@@ -41,15 +42,16 @@ class PantallaDeNumeros {
     }
 
     method temporizador(segundos) {
-        var tiempo = segundos
+        self.mostrar(segundos)
+        var tiempo = segundos - 1
 
-        game.onTick(1100, "temporizador", {
+        game.onTick(1000, "temporizador", {
             self.mostrar(tiempo)
             tiempo -= 1
 
             if(cifras.all({c => c.enCero()})) {
                 game.removeTickEvent("temporizador")
-                juego.tiempoTerminado()
+                interfaz.tiempoTerminado()
             }
         })
     }

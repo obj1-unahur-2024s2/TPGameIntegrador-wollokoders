@@ -28,26 +28,25 @@ class Cursor {
 	method initialize() {
 		keyboard.left().onPressDo({ 
 			if (position.x() != xColIzquierda) self.modificarPosicion(-variacionEnX, 0, -cantFilas)
-			desplazamientoIzquierda.play()
+			sonidos.izquierda().play()
 		})
 
 		keyboard.right().onPressDo({
 			if (position.x() != xColDerecha) self.modificarPosicion(variacionEnX, 0, cantFilas)
-			desplazamientoDerecha.play()
+			sonidos.derecha().play()
 		})
 
 		keyboard.down().onPressDo({
 			if (position.y() != yFilaAbajo) self.modificarPosicion(0, -variacionEnY, 1)
-			desplazamientoAbajo.play()
+			sonidos.abajo().play()
 		})
 
 		keyboard.up().onPressDo({
 			if (position.y() != yFilaArriba) self.modificarPosicion(0, variacionEnY, -1)
-			desplazamientoArriba.play()
+			sonidos.arriba().play()
 		})
 
 		keyboard.space().onPressDo({
-			// darVuelta.play()
             const tarjetaSeleccionada = juego.tarjetasActuales().get(ubicacion - 1)
 
             if(not tarjetaSeleccionada.estaDescubierta()) {
