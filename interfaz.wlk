@@ -2,10 +2,13 @@ import sonidos.*
 import otros.*
 import juego.*
 import cursor.*
-import pantalla.*
+import numeros.*
 
 object interfaz {
 	var puntaje = null
+	var tiempo = null
+
+	method tiempo() = tiempo
 
     method configurar() {
         game.cellSize(1)
@@ -23,22 +26,28 @@ object interfaz {
 
     method configurarTeclas() {
 		keyboard.s().onPressDo({
-			sonidos.fondo().pause()
+			if(not sonidos.fondo().estaPausado())
+				sonidos.silenciarTodo(true)
 		})
 		
 		keyboard.r().onPressDo({
-			sonidos.fondo().resume()
+			if(sonidos.fondo().estaPausado())
+				sonidos.silenciarTodo(false)
 		})
 
 		keyboard.e().onPressDo({
-			instrucciones.detenerTitileo()
-			game.addVisual(fondoVacio)
-			juego.iniciar()
+			if(game.hasVisual(config)) {
+				instrucciones.detenerTitileo()
+				game.addVisual(fondoTablero)
+				juego.iniciar()
+			}
 		})
 
 		keyboard.t().onPressDo({
-			self.retirarVisuales()
-			game.addVisual(tutorial)
+			if(game.hasVisual(config)) {
+				self.retirarVisuales()
+				game.addVisual(tutorial)
+			}
 		})
 
 		keyboard.m().onPressDo({
@@ -70,51 +79,62 @@ object interfaz {
 	}
 
     method mostrarPuntosYTiempo() {
-        game.addVisual(textoTiempo)
-		const tiempo = new PantallaDeNumeros(xDecena=1620, xUnidad=1650, y=80)
-		tiempo.temporizador(if (config.tablero() == 1) 50 else 99)
+		game.addVisual(textoTiempo)
+		tiempo = new Temporizador(x=1620, y=80)
+		tiempo.descontar()
 
-		textoPuntos.position(game.at(184,98))
+		textoPuntos.position(game.at(184,128))
 		game.addVisual(textoPuntos)
-		puntaje = new PantallaDeNumeros(xDecena=425, xUnidad=455, y=80)
+		puntaje = new Marcador(x=350, y=110)
 		puntaje.mostrar(0)
+
+		game.addVisual(textoBonus)
+		const bonus = new Temporizador(x=628, y=50)
+		bonus.seguimientoBonus()
     }
 
     method actualizarPuntaje() {
         puntaje.mostrar(juego.puntos())
     }
 
-    method volverAMostrarPuntos() {
-		textoPuntos.position(game.at(786,300))
-
+    method mostrarPuntajeFinal() {
+		textoPuntos.position(game.at(830,300))
 		game.addVisual(textoPuntos)
-		puntaje = new PantallaDeNumeros(xDecena=1030, xUnidad=1060, y=282)
+
+		puntaje = new Marcador(x=1000, y=282)
 		self.actualizarPuntaje()
+		puntaje.mostrar(juego.puntos() + juego.calcularBonus())
 	}
 
+	//son necesarios los removeTickEvent?
     method volverAlMenu() {
 		game.clear()
-		game.removeTickEvent("temporizador")
+		game.removeTickEvent("temporizador") 
+		game.removeTickEvent("bonus")
 		config.initialize()
         self.mostrarMenu()
 	}
 
     method retirarVisuales() {
-		game.allVisuals().forEach({ v => game.removeVisual(v)})
 		instrucciones.detenerTitileo()
+		game.removeTickEvent("temporizador")
+        game.removeTickEvent("bonus")
+		game.allVisuals().forEach({ v => game.removeVisual(v)})
 	}
 
     method ganar() {
         self.retirarVisuales()
-        game.removeTickEvent("temporizador")
+        // game.removeTickEvent("temporizador")
+        // game.removeTickEvent("bonus")
         game.addVisual(ganaste)
         sonidos.ganar().play()
-        self.volverAMostrarPuntos()
+        self.mostrarPuntajeFinal()
     }
 
 	method tiempoTerminado() {
+        // game.removeTickEvent("bonus")
         self.retirarVisuales()
         game.addVisual(tiempoTerminado)
-        self.volverAMostrarPuntos()
+        self.mostrarPuntajeFinal()
 	}
 }

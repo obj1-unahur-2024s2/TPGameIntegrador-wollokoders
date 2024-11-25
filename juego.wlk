@@ -1,5 +1,5 @@
 import interfaz.*
-import pantalla.*
+import numeros.*
 import otros.*
 import cursor.*
 import tarjeta.*
@@ -118,9 +118,23 @@ object juego {
 		puntos = puntos + self.puntosPorTablero() + self.puntosPorSeleccion()
 	}
 
-	method puntosPorTablero() = if (config.tablero() == 1) 1 else 2
+	method puntosPorTablero() = if (config.tablero() == 1) 0 else 1
 
 	method puntosPorSeleccion() = if (config.seleccion() == 3) 1 else 3
+
+	method calcularBonus() {
+		const porc = interfaz.tiempo().porcentajeRestante()
+
+		return //porc / 2
+			if(porc > 50) 25
+			else if(porc > 40) 20
+			else if(porc > 30) 15
+			else if(porc > 20) 10
+			else if(porc > 10) 5
+			else 0
+			// if(porc % 10 == 0 and porc < 60) porc / 2
+			// else -1
+	}
 
     method comprobarPartidaGanada() {
         game.schedule(500, {

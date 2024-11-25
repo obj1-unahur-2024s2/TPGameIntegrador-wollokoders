@@ -1,4 +1,4 @@
-object fondoVacio {
+object fondoTablero {
 	method position() = game.origin()
 
 	method image() = "vacio1.jpg"
@@ -9,6 +9,8 @@ object tutorial {
 
     method image() = "tutorialycontroles.jpg"
 }
+
+
 
 object ganaste {
     method position() = game.origin()
@@ -81,13 +83,19 @@ object instrucciones {
 }
 
 object textoPuntos {
-    var property position = game.at(184, 98)
+    var property position = game.at(184, 128)
     
-    method image() = "Puntos.png"
+    method image() = "Puntosb.png"
+}
+
+object textoBonus {
+    method position() = game.at(184, 68)
+
+    method image() = "Bonus.png"
 }
 
 object textoTiempo {
-    method image() = "Tiempo.png"
+    method image() = "Tiempob.png"
 
-    method position() = game.at(1356, 98)
+    method position() = game.at(1430, 98)
 }
