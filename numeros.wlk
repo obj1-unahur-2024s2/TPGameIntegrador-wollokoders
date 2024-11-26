@@ -10,10 +10,10 @@ class Digito {
     method position() = position
 
     method mostrar(numero) {
-        image = "num" + numero.toString() + ".png"
+        image = "num" + numero.toString() + "b.png"
     }
 
-    method enCero() = image == "num0.png"
+    method enCero() = image == "num0b.png"
 }
 
 class Marcador {

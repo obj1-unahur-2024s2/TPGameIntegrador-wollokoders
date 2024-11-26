@@ -80,16 +80,16 @@ object interfaz {
 
     method mostrarPuntosYTiempo() {
 		game.addVisual(textoTiempo)
-		tiempo = new Temporizador(x=1620, y=80)
+		tiempo = new Temporizador(x=501, y=99)
 		tiempo.descontar()
 
-		textoPuntos.position(game.at(184,128))
+		textoPuntos.position(game.at(136,108))
 		game.addVisual(textoPuntos)
-		puntaje = new Marcador(x=350, y=110)
+		puntaje = new Marcador(x=349, y=99)
 		puntaje.mostrar(0)
 
 		game.addVisual(textoBonus)
-		const bonus = new Temporizador(x=628, y=50)
+		const bonus = new Temporizador(x=1676, y=99)
 		bonus.seguimientoBonus()
     }
 
@@ -98,10 +98,10 @@ object interfaz {
     }
 
     method mostrarPuntajeFinal() {
-		textoPuntos.position(game.at(830,300))
+		textoPuntos.position(game.at(801,300))
 		game.addVisual(textoPuntos)
 
-		puntaje = new Marcador(x=1000, y=282)
+		puntaje = new Marcador(x=1014, y=291)
 		self.actualizarPuntaje()
 		puntaje.mostrar(juego.puntos() + juego.calcularBonus())
 	}

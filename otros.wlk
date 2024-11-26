@@ -85,17 +85,16 @@ object instrucciones {
 object textoPuntos {
     var property position = game.at(184, 128)
     
-    method image() = "Puntosb.png"
+    method image() = "Puntos3R.png"
 }
 
 object textoBonus {
-    method position() = game.at(184, 68)
+    method position() = game.at(1200, 108)
 
-    method image() = "Bonus.png"
+    method image() = "Bonus2R.png"
 }
 
 object textoTiempo {
-    method image() = "Tiempob.png"
-
-    method position() = game.at(1430, 98)
+    method position() = game.at(500, 108)
+    method image() = "Tiempo3R.png"
 }
