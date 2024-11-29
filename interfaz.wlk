@@ -14,7 +14,7 @@ object interfaz {
         game.cellSize(1)
 		game.width(1920)
 		game.height(1200)
-		game.boardGround("mainb.jpg")
+		game.boardGround("main5.jpg")
 		sonidos.fondo().play()
     }
 
@@ -106,11 +106,8 @@ object interfaz {
 		puntaje.mostrar(juego.puntos() + juego.calcularBonus())
 	}
 
-	//son necesarios los removeTickEvent?
     method volverAlMenu() {
 		game.clear()
-		game.removeTickEvent("temporizador") 
-		game.removeTickEvent("bonus")
 		config.initialize()
         self.mostrarMenu()
 	}
@@ -124,15 +121,12 @@ object interfaz {
 
     method ganar() {
         self.retirarVisuales()
-        // game.removeTickEvent("temporizador")
-        // game.removeTickEvent("bonus")
         game.addVisual(ganaste)
         sonidos.ganar().play()
         self.mostrarPuntajeFinal()
     }
 
 	method tiempoTerminado() {
-        // game.removeTickEvent("bonus")
         self.retirarVisuales()
         game.addVisual(tiempoTerminado)
         self.mostrarPuntajeFinal()

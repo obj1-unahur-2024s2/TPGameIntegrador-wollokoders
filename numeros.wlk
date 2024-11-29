@@ -41,17 +41,15 @@ class Temporizador inherits Marcador {
     method porcentajeRestante() = porcentajeRestante
 
     method descontar() {
-        const tiempoInicial = if(config.tablero() == 1) 50 else 99
+        const tiempoInicial = if(config.tablero() == 1) 50 else 90
         self.mostrar(tiempoInicial)
 
-        // var tiempoRestante = tiempoInicial - 1
-        var tiempoRestante = tiempoInicial
-        tiempoRestante -= 1
+        var tiempoRestante = tiempoInicial - 1
 
         game.onTick(1000, "temporizador", {
             self.mostrar(tiempoRestante)
+            porcentajeRestante = 100 * (tiempoRestante) / tiempoInicial
             tiempoRestante -= 1
-            porcentajeRestante = 100 * tiempoRestante / tiempoInicial
 
             if(digitos.all({c => c.enCero()})) {
                 game.removeTickEvent("temporizador")
@@ -62,7 +60,6 @@ class Temporizador inherits Marcador {
 
     method seguimientoBonus() {
         self.mostrar(juego.calcularBonus())
-        // self.mostrar(25)
         var bonusActual = 0
 
         game.onTick(1000, "bonus", {

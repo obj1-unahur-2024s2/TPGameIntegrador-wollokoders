@@ -1,7 +1,7 @@
 object fondoTablero {
 	method position() = game.origin()
 
-	method image() = "vacio1.jpg"
+	method image() = "vacio5.jpg"
 }
 
 object tutorial {
@@ -9,7 +9,6 @@ object tutorial {
 
     method image() = "tutorialycontroles.jpg"
 }
-
 
 
 object ganaste {
@@ -27,7 +26,7 @@ object tiempoTerminado {
 object config {
     var tablero = 1 //1 o 2
     var seleccion = 3 //3 o 4
-    var image = "config13d.png"
+    var image = "config13g.png"
 
     method tablero() = tablero
     method seleccion() = seleccion
@@ -54,7 +53,7 @@ object config {
     }
 
     method cambiarImagen() {
-        image = "config" + tablero.toString() + seleccion.toString() + "d.png"
+        image = "config" + tablero.toString() + seleccion.toString() + "g.png"
     }
 }
 
