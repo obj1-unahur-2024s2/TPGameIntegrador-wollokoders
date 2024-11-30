@@ -10,17 +10,17 @@
 
 ## Capturas
 
-![Pantalla de inicio](https://github.com/user-attachments/assets/bf2c039d-0ced-441d-b263-1b01654169d8)
+![Pantalla de inicio](https://github.com/obj1-unahur-2024s2/TPGameIntegrador-wollokoders/blob/main/assets/PantallaInicio.png?raw=true)
 
 ![Tutorial](https://github.com/user-attachments/assets/cf46a5c4-9e03-4fb5-aaa4-39f00ab5fa3a)
 
-![Tablero de 12 figuritas](https://github.com/user-attachments/assets/65ca3286-c494-4fe6-ab2d-f8e5b372417e)
+![Tablero de 12 figuritas](https://github.com/obj1-unahur-2024s2/TPGameIntegrador-wollokoders/blob/main/assets/12cartas.png?raw=true)
 
-![Tablero de 18 figuritas](https://github.com/user-attachments/assets/b6c01c94-c224-461c-8eeb-4d8c23de4f9d)
+![Tablero de 18 figuritas](https://github.com/obj1-unahur-2024s2/TPGameIntegrador-wollokoders/blob/main/assets/18cartas.png?raw=true)
 
-![Pantalla de tiempo terminado](https://github.com/user-attachments/assets/dfc9ffc6-ec64-4d83-9367-e181f19b2419)
+![Pantalla de tiempo terminado](https://github.com/obj1-unahur-2024s2/TPGameIntegrador-wollokoders/blob/main/assets/Tiempo.png?raw=true)
 
-![Pantalla de partida ganada](https://github.com/user-attachments/assets/522ff143-5d76-43c3-a939-d96e2af0d562)
+![Pantalla de partida ganada](https://github.com/obj1-unahur-2024s2/TPGameIntegrador-wollokoders/blob/main/assets/Ganaste.png?raw=true)
 
 ## Reglas del juego
 El juego comienza con un tablero de figuritas ocultas. El objetivo es descubirlas todas encontrando los pares de figuritas iguales. Se puede seleccionar un tablero de 12 o 18 figuritas y se puede jugar con la selección Argentina o una selección al azar. En esta versión están incluidas las selecciones de Argentina, Brasil, Paraguay, Uruguay, Bolivia y Canadá. Se obtienen puntos por cada par encontrado según la siguiente tabla:
