@@ -120,10 +120,12 @@ object interfaz {
 	}
 
     method ganar() {
-        self.retirarVisuales()
-        game.addVisual(ganaste)
-        sonidos.ganar().play()
-        self.mostrarPuntajeFinal()
+		if(not game.hasVisual(tiempoTerminado)) {
+			self.retirarVisuales()
+			game.addVisual(ganaste)
+			sonidos.ganar().play()
+			self.mostrarPuntajeFinal()
+		}
     }
 
 	method tiempoTerminado() {

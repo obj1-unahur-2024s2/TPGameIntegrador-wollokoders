@@ -26,12 +26,6 @@ object juego {
 		interfaz.desplegarTarjetas()
 		interfaz.crearCursor()
 		interfaz.mostrarPuntosYTiempo()
-
-        //sirve para testear pantalla ganaste
-        keyboard.enter().onPressDo({
-			tarjetasActuales.forEach({t => t.descubrir() })
-            self.comprobarPartidaGanada()
-        })
 	}
 
 	method generar12Tarjetas() {

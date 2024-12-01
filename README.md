@@ -23,7 +23,7 @@
 ![Pantalla de partida ganada](https://github.com/obj1-unahur-2024s2/TPGameIntegrador-wollokoders/blob/main/assets/Ganaste.png?raw=true)
 
 ## Reglas del juego
-El juego comienza con un tablero de figuritas ocultas. El objetivo es descubirlas todas encontrando los pares de figuritas iguales. Se puede seleccionar un tablero de 12 o 18 figuritas y se puede jugar con la selección Argentina o una selección al azar. En esta versión están incluidas las selecciones de Argentina, Brasil, Paraguay, Uruguay, Bolivia y Canadá. Se obtienen puntos por cada par encontrado según la siguiente tabla:
+El juego comienza con un tablero de figuritas ocultas. El objetivo es descubirlas todas encontrando los pares de figuritas iguales. Se puede seleccionar un tablero de 12 o 18 figuritas y jugar con la selección argentina o una selección al azar. En esta versión están incluidas las selecciones de Argentina, Brasil, Paraguay, Uruguay, Bolivia y Canadá. Se obtienen puntos por cada par encontrado según la siguiente tabla:
 
 |                           | Tablero x12 | Tablero x18 |
 |---------------------------|-------------|-------------|
@@ -42,16 +42,15 @@ Al puntaje obtenido se le sumará el **bonus**, que disminuye a medida que el ti
         - Tecla **3**: Jugar con selección argentina
         - Tecla **4**: Jugar con una selección al azar excluyendo la argentina
 - En una partida
-    - **Flechas de dirección**: mover cursor
+    - **Flechas**: mover cursor
     - Tecla **espacio**: descubrir la figurita seleccionada con el cursor
 - Configuración de audio:
     - Tecla **S**: silenciar todos los sonidos 
     - Tecla **R**: volver a reproducir todos los sonidos
-- En cualquier momento se puede volver al menú presionando la tecla M.
+- En cualquier momento se puede volver al menú presionando la tecla **M**.
 
 
 ## Otros
-
 - Universidad Nacional De Hurlingham, Programación de Objetos I
 - Versión de wollok utilizada: 0.2.11
 - Una vez terminado, no tenemos problemas en que el repositorio sea público

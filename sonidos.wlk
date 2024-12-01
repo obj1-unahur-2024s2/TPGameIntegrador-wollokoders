@@ -53,7 +53,7 @@ object sonidos {
     method fondo() = misc.get(3)
 
     method silenciarTodo(bool) {
-        (direcciones + misc).forEach({d => d.estaSilenciado(bool)})
+        (direcciones + misc).forEach({s => s.estaSilenciado(bool)})
         self.fondo().playPause()
     }
 }
